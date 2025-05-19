@@ -1,6 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import auth, sets, cards, progress, search
+from app.database import engine
+from app.models import models
+
+# Create database tables if they don't exist
+models.Base.metadata.create_all(bind=engine)
 
 # Create FastAPI app
 app = FastAPI(

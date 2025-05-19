@@ -20,7 +20,7 @@ const LearnMode: React.FC = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -46,7 +46,7 @@ const LearnMode: React.FC = () => {
         setCardsList(cardsWithProgress);
       } catch (err: any) {
         console.error('Error fetching data:', err);
-        setError('Failed to load flashcards. Please try again later.');
+        setErrorMessage('Failed to load flashcards. Please try again later.');
       } finally {
         setIsLoading(false);
       }

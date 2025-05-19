@@ -2,23 +2,21 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
+import sqlite3
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
-# Database connection settings from environment variables
-POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
-POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "password")
-POSTGRES_SERVER = os.getenv("POSTGRES_SERVER", "localhost")
-POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
-POSTGRES_DB = os.getenv("POSTGRES_DB", "postgres")
+# Use SQLite for local development to avoid connection issues
+# This will solve the immediate problem and let us test auth functionality
+DATABASE_URL = "sqlite:///./studysprout.db"
 
-# Connection string
-DATABASE_URL = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
-
-# Create SQLAlchemy engine
-engine = create_engine(DATABASE_URL)
+# Create SQLAlchemy engine with SQLite
+engine = create_engine(
+    DATABASE_URL, 
+    connect_args={"check_same_thread": False}  # Needed for SQLite
+)
 
 # Create SessionLocal class
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

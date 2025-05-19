@@ -24,7 +24,7 @@ const SearchBar: React.FC = () => {
     if (!query) {
       fetchPopularSets();
     }
-  }, []);
+  }, [query]);
 
   const fetchPopularSets = async () => {
     setIsLoading(true);

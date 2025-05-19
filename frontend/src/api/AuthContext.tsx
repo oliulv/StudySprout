@@ -52,9 +52,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoading(true);
     try {
       const response = await auth.login({ email, password });
-      const { token, user } = response.data;
-      localStorage.setItem('token', token);
-      setToken(token);
+      const { access_token, user } = response.data;
+      localStorage.setItem('token', access_token);
+      setToken(access_token);
       setUser(user);
     } catch (error) {
       console.error('Login failed:', error);
@@ -68,9 +68,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLoading(true);
     try {
       const response = await auth.register({ email, password });
-      const { token, user } = response.data;
-      localStorage.setItem('token', token);
-      setToken(token);
+      const { access_token, user } = response.data;
+      localStorage.setItem('token', access_token);
+      setToken(access_token);
       setUser(user);
     } catch (error) {
       console.error('Registration failed:', error);

@@ -169,7 +169,7 @@ const MatchGame: React.FC = () => {
     setSelectedItem(null);
     
     // Check if game is complete
-    const allMatched = matchItems.every(item => item.matched || item.id === item.id);
+    const allMatched = matchItems.every(item => item.matched);
     if (allMatched) {
       setIsGameComplete(true);
       setTimerRunning(false);

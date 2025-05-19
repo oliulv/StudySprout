@@ -23,8 +23,19 @@ api.interceptors.request.use((config) => {
 export const auth = {
   register: (data: { email: string; password: string }) => 
     api.post('/auth/register', data),
-  login: (data: { email: string; password: string }) => 
-    api.post('/auth/login', data),
+  login: (data: { email: string; password: string }) => {
+    // OAuth2 requires form-urlencoded data with username (not email)
+    const params = new URLSearchParams();
+    params.append('username', data.email);  // FastAPI OAuth2 expects 'username'
+    params.append('password', data.password);
+    
+    // Send as form-urlencoded instead of JSON
+    return api.post('/auth/login', params, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+  },
   logout: () => api.post('/auth/logout')
 };
 
@@ -57,9 +68,11 @@ export const progress = {
   getUserProgress: () => api.get('/progress')
 };
 
-export default {
+const apiService = {
   auth,
   sets,
   cards,
   progress
 };
+
+export default apiService;

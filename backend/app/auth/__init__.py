@@ -3,7 +3,8 @@ from app.auth.auth_utils import (
     verify_password,
     authenticate_user,
     create_access_token,
-    get_current_user
+    get_current_user,
+    oauth2_scheme
 )
 
 __all__ = [
@@ -11,5 +12,6 @@ __all__ = [
     'verify_password',
     'authenticate_user',
     'create_access_token',
-    'get_current_user'
+    'get_current_user',
+    'oauth2_scheme'
 ]
