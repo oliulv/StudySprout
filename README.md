@@ -74,7 +74,3 @@ See the README files in the `frontend/` and `backend/` directories for detailed 
    ```
    npm start
    ```
-
-## License
-
-This project is licensed under the MIT License.
